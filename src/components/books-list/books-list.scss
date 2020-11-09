@@ -1,0 +1,10 @@
+.books-list {
+  thead {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &__image {
+    max-width: 100px;
+  }
+}
