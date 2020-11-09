@@ -1,12 +1,12 @@
 import React from "react";
 import {BookstoreServiceConsumer} from "../bookstore-service-context";
 
-const withBookstoreService = (Component) => {
+const withBookstoreService = () => (Component) => {
     return props => (
         <BookstoreServiceConsumer>
             {
-                value => {
-                    return <Component {...props} bookstore={value.getBooks()} />
+                bookstoreService => {
+                    return <Component {...props} bookstoreService={bookstoreService} />
                 }
             }
         </BookstoreServiceConsumer>

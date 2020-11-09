@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+
+  &__link {
+    padding: 10px 20px;
+    display: inline-block;
+    text-decoration: none;
+    min-width: 200px;
+    text-align: center;
+
+    &:hover {
+      background-color: #BE8868;
+      color: #FFF;
+    }
+  }
+
+  &__link:visited {
+    color: inherit;
+  }
+}

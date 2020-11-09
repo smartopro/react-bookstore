@@ -1,4 +1,4 @@
-const createBook = (id, caption, author, imageURL) => ({ id, caption, author, imageURL });
+const createBook = (id, title, author, imageURL) => ({ id, title, author, imageURL });
 
 export default class BookstoreService {
     getBooks() {
