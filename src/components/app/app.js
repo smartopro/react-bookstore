@@ -22,11 +22,11 @@ const App = () => {
             <ErrorBoundary>
                 <BookstoreServiceProvider value={bookstoreService}>
                     <Router>
-                        <div className="app">
-                            <Header />
+                        <div className="app container">
+                            <Header numItems={3} total={90} />
                             <Switch>
                                 <Route path="/" exact component={HomePage} />
-                                <Route path="/cart-page" exact component={CartPage} />
+                                <Route path="/cart" exact component={CartPage} />
                                 <Redirect to="/" />
                             </Switch>
                         </div>

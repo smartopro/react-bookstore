@@ -2,11 +2,14 @@ import React from "react";
 import "./header.scss";
 import {Link} from "react-router-dom";
 
-const Header = () => {
+const Header = ({numItems, total}) => {
     return (
-        <div className="header">
-            <Link className="header__link" to="/">Home</Link>
-            <Link className="header__link" to="/cart-page">Cart page</Link>
+        <div className="header row">
+            <Link className="header__link header__logo" to="/">Book store</Link>
+            <Link className="header__link header__cart" to="/cart">
+                <i className="header__cart-icon fa fa-shopping-cart" />
+                {numItems} items ({total} $)
+            </Link>
         </div>
     )
 }

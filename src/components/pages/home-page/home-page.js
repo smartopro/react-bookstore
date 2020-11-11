@@ -1,11 +1,13 @@
 import React from "react";
 import "./home-page.scss";
-import BooksList from "../../books-list";
+import BooksListContainer from "../../../containers/books-list-container";
+import ShoppingCartTable from "../../shopping-cart-table";
 
 const HomePage = () => {
     return (
         <div className="home-page">
-            <BooksList />
+            <BooksListContainer />
+            <ShoppingCartTable />
         </div>
     )
 }
