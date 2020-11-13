@@ -4,7 +4,7 @@ import "./error-indicator.scss";
 const ErrorIndicator = ({error}) => {
     return (
         <div className="error">
-            Error: { error.message }
+            Error: { error?.message }
         </div>
     )
 }

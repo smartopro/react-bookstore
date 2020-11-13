@@ -1,9 +1,9 @@
 import React from "react";
 import "./shopping-cart-table.scss";
 import {connect} from "react-redux";
-import {bookAddedToCart, bookDeletedFromCart} from "../../actions"
+import { updateBooksSuccess } from "../../actions"
 
-const ShoppingCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => {
+const ShoppingCartTable = ({items, total, onUpdate}) => {
     const RenderRow = (item, index) => {
         const { id, title, count, total } = item;
         return (
@@ -13,13 +13,13 @@ const ShoppingCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => 
                 <td>{count}</td>
                 <td>{total} $</td>
                 <td className="shopping-cart-table__buttons">
-                    <button className="btn btn-outline-danger shopping-cart-table__button" onClick={() => onDelete(id, true)}>
+                    <button className="btn btn-outline-danger shopping-cart-table__button" onClick={() => onUpdate(id, -count)}>
                         <i className="fa fa-trash-o" />
                     </button>
-                    <button className="btn btn-outline-success shopping-cart-table__button" onClick={() => onIncrease(id)}>
+                    <button className="btn btn-outline-success shopping-cart-table__button" onClick={() => onUpdate(id, 1)}>
                         <i className="fa fa-plus-circle" />
                     </button>
-                    <button className="btn btn-outline-warning shopping-cart-table__button" onClick={() => onDecrease(id)}>
+                    <button className="btn btn-outline-warning shopping-cart-table__button" onClick={() => onUpdate(id, -1)}>
                         <i className="fa fa-minus-circle" />
                     </button>
                 </td>
@@ -54,14 +54,18 @@ const ShoppingCartTable = ({items, total, onIncrease, onDecrease, onDelete}) => 
 }
 
 const mapStateToProps = state => ({
-    items: state.cartItems,
-    total: state.orderTotal
+    items: state.shoppingCart.cartItems,
+    total: state.shoppingCart.orderTotal
 });
 
-const mapDispatchToProps = dispatch => ({
-    onIncrease: id => dispatch(bookAddedToCart(id)),
-    onDecrease: id => dispatch(bookDeletedFromCart(id)),
-    onDelete: (id, deleteAll) => dispatch(bookDeletedFromCart(id, deleteAll))
-});
+// const mapDispatchToProps = dispatch => ({
+//     onIncrease: id => dispatch(bookAddedToCart(id)),
+//     onDecrease: id => dispatch(bookDeletedFromCart(id)),
+//     onDelete: (id, deleteAll) => dispatch(bookDeletedFromCart(id, deleteAll))
+// });
+
+const mapDispatchToProps = {
+    onUpdate: updateBooksSuccess
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);

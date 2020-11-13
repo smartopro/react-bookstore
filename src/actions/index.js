@@ -14,21 +14,25 @@ const fetchBooksFailure = error => ({
     payload: error
 });
 
-const bookAddedToCart = bookId => ({
-    type: actionTypes.ADD_BOOK_SUCCESS,
-    payload: bookId
+const updateBooksSuccess = (id, count = 1) => ({
+    type: actionTypes.UPDATE_BOOKS_SUCCESS,
+    payload: {id, count}
 });
 
-const bookDeletedFromCart = (bookId, deleteAll) => ({
-    type: actionTypes.DELETE_BOOK_SUCCESS,
-    payload: {bookId, deleteAll}
-});
-
-const fetchBooks = (bookstoreService, dispatch) => () => {
+// without THUNK:
+const fetchBooksOld = (bookstoreService, dispatch) => () => {
     dispatch(fetchBooksRequest());
     bookstoreService.getBooks()
-        .then( books => dispatch(fetchBooksSuccess(books)) )
+        .then(books => dispatch(fetchBooksSuccess(books)))
         .catch(error => dispatch(fetchBooksFailure(error)) );
 }
 
-export { fetchBooks, bookAddedToCart, bookDeletedFromCart };
+// with THUNK:
+const fetchBooks = bookstoreService => () => dispatch => {
+    dispatch(fetchBooksRequest());
+    bookstoreService.getBooks()
+        .then(books => dispatch(fetchBooksSuccess(books)))
+        .catch(error => dispatch(fetchBooksFailure(error)) );
+}
+
+export { fetchBooks, updateBooksSuccess };
